@@ -6,14 +6,16 @@ def begin():
 
     """Hier wordt de begin menu getoont waar bij de gebruiker kiest tussen de regels van het spel of het starten van het spel of het stoppen van het spel."""
 
-    print("**************************************")
-    print("WELKOM BIJ MATSER MIND ARE YOU READY?")
-    print("**************************************\n")
-    print("========================")
-    print("|| 1.uitleg en regels ||\n|| 2.start het spel   ||\n|| 3.stoppen          ||")
-    print("========================")
-    keuze = input("voer uw keuze in {1}, {2} of {3}: ")
-    print("-------------------------------------------\n")
+    print("                                                    **************************************")
+    print("                                                     WELKOM BIJ MATSER MIND ARE YOU READY?")
+    print("                                                    **************************************\n")
+    print("                                                          ========================")
+    print("                                                          || 1.uitleg en regels ||")
+    print(  "                                                          || 2.start het spel   || ")
+    print(        "                                                          || 3.stoppen          ||")
+    print("                                                          ========================\n")
+    keuze = input("                                                      voer uw keuze in {1}, {2} of {3}: ")
+    print("                                                 -------------------------------------------\n")
 
     while True:
 
