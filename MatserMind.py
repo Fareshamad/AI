@@ -134,7 +134,6 @@ def start_spel_computer():
                 "de letters staan voor de hoofdletter van de kleuren.\nDus 'R' voor Rood en 'G' voor Groen en 'B' voor blauw en 'Z' voor Zwart en 'P' voor Paars en 'O' voor Oranje.")
             kleuren = ["R", "G", "B", "Z", "P", "O"]
             print(kleuren)
-            print(code)
             poging -= 1
             zwart_pin = 0
             wit_pin = 0
