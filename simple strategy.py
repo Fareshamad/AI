@@ -225,6 +225,11 @@ def VolgendeGok(gok):
 
 
 def oplossing_simple(code):
+    """
+    Dit een functie voor de simple algoritme waarbij een gok wordt gemaakt met de eerste combinatie van alle
+    combinaties en vervolgens wordt een logishe gok gemaakt op de basis van de feedback.
+
+    """
 
     oude_gokken = []
     gok = alle_oplossingen()[0]
