@@ -4,6 +4,7 @@
 import random
 
 kleuren = ["R", "G", "B", "Z", "P", "O"]
+vlag = [1,1,1,1]
 
 
 
@@ -100,69 +101,44 @@ def start_spel_computer():
     """Hier maakt de computer voor de gebruiker om te kunnen krakken een vervolgens wordt een feedback op gegeven met
     zwart en wit pinnen """
 
-    global zwart_pin
-    global wit_pin
-    global vlag
-    global code
-    global kleuren
-    global gok
+
+    pogingen = 8
 
     print(
         "de letters staan voor de hoofdletter van de kleuren.\nDus 'R' voor Rood en 'G' voor Groen en 'B' voor blauw "
         "en 'Z' voor Zwart en 'P' voor Paars en 'O' voor Oranje.")
     kleuren = ["R", "G", "B", "Z", "P", "O"]
     print(kleuren)
-    code = random.sample(kleuren, 4)
+    code = random.sample(kleuren, 4)  # een random sample maken
     print(code)
-    poging = 8
-    print(f"u hebt {poging} pogingen: ")
-
-    gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
-        "kies derde kleuren : ").upper(), input("kies vierde kleuren: ").upper()
 
     while True:
-        if any(x in kleuren for x in gok):
-            print(f"dat is uw gok {gok}\n")
-            break
-        else:
-            print("\nDat is een ongeldig invoer, probeer opnieuw! ")
-            print(f"hier zijn alle kleuren opnieuw {kleuren}")
+        print(f"u hebt {pogingen} pogingen: ")
+        gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
+            "kies derde kleuren : ").upper(), input("kies vierde kleuren: ").upper()
 
-            gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: " ).upper(), input("kies derde kleuren:  ").upper(), input("kies vierde kleuren: ").upper()
+        while True:
+            if any(x in kleuren for x in gok):
+                break
+            else:
+                print("\nDat is een ongeldig invoer, probeer opnieuw! ")
+                print(f"hier zijn alle kleuren opnieuw {kleuren}")
 
-    feedback(gok, code)
-    print(f"Uw feedback is {zwart_pin} zwart pin,en dat is uw gok {gok}")
-    print(f"Uw feedback is {wit_pin} wit pin,en dat is uw gok {gok}\n")
+                gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
+                    "kies derde kleuren : ").upper(), input("kies vierde kleuren: ").upper()
 
-    gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input("kies derde kleuren:  ").upper(), input("kies vierde kleuren: ").upper()
-
-
-    poging = 8
-
-    while True:
+        zwart_pin, wit_pin = feedback(gok, code)
         if zwart_pin == 4:
-            print("Gefeliciteerd je hebt gewonnen!!  ")
+            print("Gefeliciteerd je hebt gewonnen !!")
             break
 
-        else:
-            print(
-                "de letters staan voor de hoofdletter van de kleuren.\nDus 'R' voor Rood en 'G' voor Groen en 'B' "
-                "voor blauw en 'Z' voor Zwart en 'P' voor Paars en 'O' voor Oranje.")
-            kleuren = ["R", "G", "B", "Z", "P", "O"]
-            print(kleuren)
-            poging -= 1
-            zwart_pin = 0
-            wit_pin = 0
-            print(f"u heeft {poging} pogingen: ")
-            gok = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
-                "kies derde kleuren : ").upper(), input("kies vierde kleuren: ").upper()
-            feedback(gok, code)
-            print(f"Uw feedback is {zwart_pin} zwart pin,en dat is uw gok {gok}")
-            print(f"Uw feedback is {wit_pin} wit pin,en dat is uw gok {gok}\n")
+        print(f"zwarte pin: {zwart_pin}\nwit pin: {wit_pin}\ngok: {gok}")
+        pogingen -= 1
 
-        if poging < 1:
-            print("U kunt helaas de code niet kraken. ")
+        if pogingen < 1:
+            print("Helaas je kan de code niet krakken! ")
             break
+
 
 
 def start_spel_gebruiker():
@@ -170,9 +146,6 @@ def start_spel_gebruiker():
     gegeven met zwart en wit pinnen """
 
 
-    global code
-    global kleuren
-    global gok
 
 
     print(
@@ -193,10 +166,9 @@ def start_spel_gebruiker():
             print("\nDat is een ongeldig invoer, probeer opnieuw! ")
             print(f"hier zijn alle kleuren opnieuw {kleuren}")
 
-            code = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: " ).upper(), input("kies derde kleuren:  ").upper(), input("kies vierde kleuren: ").upper()
-
             code = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
                 "kies derde kleuren:  ").upper(), input("kies vierde kleuren: ").upper()
+            code1 = list(code)
     poging = 8
     oplossing_simple(code)
     if poging < 1:
@@ -206,36 +178,46 @@ def start_spel_gebruiker():
 def feedback(gok ,code):
 
     """deze functie laat de feedback zien op de gok die de computer of de gebruiker maakt."""
-
-    global kleuren
-    global zwart_pin
-    global wit_pin
-    global vlag
-
-    vlag = [1, 1, 1, 1]
+    code1 = list(code)
     zwart_pin = 0
     wit_pin = 0
-
-    for i in range(4):
-        if gok[i] == code[i]:
-            vlag[i] = 0
+    gebruikte_pinnen = []
+    for pin in range(len(gok)):
+        if gok[pin] == code1[pin]:
             zwart_pin += 1
+            gebruikte_pinnen.append(pin)
 
-
+    copy = code1[::]
+    # Hier worden de pinnen gecheckt voor de kleuren die juist zijn gegokt (+ verkeerde plek)
+    for pin in gebruikte_pinnen:
+        copy.remove(code1[pin])
     for i in range(4):
-        if vlag[i] == 1:
-            for x in range(4):
-                if gok[i] == code[x] and vlag[x] == 1:
-                    vlag[x] = 0
-                    wit_pin += 1
+        if i not in gebruikte_pinnen:
+            if gok[i] in copy:
+                wit_pin += 1
+                copy.remove(gok[i])
+
     return zwart_pin, wit_pin
+
+
+    # zwart_pin = 0
+    # wit_pin = 0
+    #
+    # for i in range(0, len(code)):
+    #     if gok[i] == code[i]:
+    #         vlag[i] = 0
+    #         zwart_pin += 1
+    # for i in range(4):
+    #     if vlag[i] == 1:
+    #         for x in range(0, len(code)):
+    #             if gok[i] == code[x] and vlag[x] == 1:
+    #                 wit_pin += 1
+    #                 vlag[x] = 0
+    # return zwart_pin, wit_pin
 
 
 def alle_oplossingen():
     """Hier worden alle mogelijk optie getoont die de computer moet gebruiken om de code te kunnen krakken"""
-
-    global oplossingen
-    global mogelijk_oplossing
 
 
     kluerens = "RGBZPO"
@@ -270,14 +252,13 @@ def oplossing_simple(code):
         poging += 1
         zwart_pin, wit_pin = feedback(gok, code)
         oude_gokken.append((gok, zwart_pin, wit_pin))
-        print(gok, zwart_pin, wit_pin)
+        print(f"zwart pinnen : {zwart_pin}, witte pinnen : {wit_pin} en de gok {gok[0],gok[1],gok[2],gok[3]}")
         if zwart_pin == 4:
             print(f"Gefeliciteerd je hebt de code in {poging} keren geraden !!  ")
             break
 
         while True:
             gok = VolgendeGok(gok)
-
             logishe_gok = True
             for g, zwart_pin, wit_pin in oude_gokken:
                 nzwart_pin, nwit_pin = feedback(gok, g)
@@ -293,4 +274,3 @@ def oplossing_simple(code):
 
 
 begin()
-
