@@ -75,12 +75,9 @@ def regels():
 
 def tegenstander():
     """een functie waar bij u tegenstander mag kiezen.
-
-
     als de gebruiker op 1 drukt dan wordt de code voor hem gemaakt en hij mag het krakken.
-
     en als de gebruiker op 2 drukt dan moet hij zelf de code maken voor de computer om te krakken.
-        """
+    """
 
     print("Alright here we go, u mag kiezen uit de volgende opties: \n"
           "\n1. De computer tegen u."
@@ -97,8 +94,10 @@ def tegenstander():
 
 
 def start_spel_computer():
-    """Hier maakt de computer voor de gebruiker om te kunnen krakken een vervolgens wordt een feedback op gegeven met
-    zwart en wit pinnen """
+    """
+    Hier maakt de computer voor de gebruiker om te kunnen krakken een vervolgens wordt een feedback op gegeven met
+    zwart en wit pinnen.
+    """
 
 
     pogingen = 8
@@ -140,8 +139,10 @@ def start_spel_computer():
 
 
 def start_spel_gebruiker():
-    """Hier maakt de gebruiker de code voor de computer om te kunnen krakken een vervolgens wordt een feedback op
-    gegeven met zwart en wit pinnen """
+    """
+    Hier maakt de gebruiker de code voor de computer om te kunnen krakken een vervolgens wordt een feedback op
+    gegeven met zwart en wit pinnen.
+     """
 
 
     print(
@@ -192,7 +193,7 @@ def oplossing_self(antwoord, huidge_gok):
     krijgt dan maakt hij een nieuwe gok met vier kleuren die het zelfde zijn.
     wanneer er feedback is met een zwart pin dan verander hij de laatste index met een nieuwe kleur tot dat ie alle kleuren
     door loopt en daarna doet ie het zelfde met [-1] tot dat ie het code kraakt.
-"""
+    """
 
     volgende_gok = []
 
@@ -235,7 +236,10 @@ def oplossing_self(antwoord, huidge_gok):
 
 def feedback(gok ,code):
 
-    """deze functie laat de feedback zien op de gok die de computer of de gebruiker maakt."""
+    """
+    met deze functie laat ik een feedback achter voor de gebruiker of de computer om te kunnen
+    weten hoeveel zwart of wit pinnen ze hebben
+    """
 
 
     code1 = list(code)
@@ -252,28 +256,15 @@ def feedback(gok ,code):
     copy = code1[::]
     for x in oude_gok:
         copy.remove(code1[x])
-    for i in range(4):
+    # hier loop ik weer door de lengte van de gok
+    for i in range(len(gok)):
         if i not in oude_gok:
+            # hier check ik als de gok[x] gelijk in code dan heeft hij een wit pin
             if gok[i] in copy:
                 wit_pin += 1
                 copy.remove(gok[i])
 
     return zwart_pin, wit_pin
-
-
-    # zwart_pin = 0
-    # wit_pin = 0
-    #
-    # for i in range(4):
-    #     if gok[i] == code[i]:
-    #         vlag[i] = 0
-    #         zwart_pin += 1
-    #
-    # for i in range(4):
-    #     if vlag[i] == 1 and gok[i] in code[i]:
-    #         wit_pin += 1
-    # return zwart_pin, wit_pin
-
 
 
 

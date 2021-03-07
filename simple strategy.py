@@ -168,7 +168,6 @@ def start_spel_gebruiker():
 
             code = input("kies eerste kleuren: ").upper(), input("kies tweede kleuren: ").upper(), input(
                 "kies derde kleuren:  ").upper(), input("kies vierde kleuren: ").upper()
-            code1 = list(code)
     poging = 8
     oplossing_simple(code)
     if poging < 1:
@@ -176,8 +175,10 @@ def start_spel_gebruiker():
 
 
 def feedback(gok ,code):
+    """
+    deze functie laat de feedback zien op de gok die de computer of de gebruiker maakt.
 
-    """deze functie laat de feedback zien op de gok die de computer of de gebruiker maakt."""
+    """
     code1 = list(code)
     zwart_pin = 0
     wit_pin = 0
@@ -188,7 +189,6 @@ def feedback(gok ,code):
             gebruikte_pinnen.append(pin)
 
     copy = code1[::]
-    # Hier worden de pinnen gecheckt voor de kleuren die juist zijn gegokt (+ verkeerde plek)
     for pin in gebruikte_pinnen:
         copy.remove(code1[pin])
     for i in range(4):
@@ -198,24 +198,6 @@ def feedback(gok ,code):
                 copy.remove(gok[i])
 
     return zwart_pin, wit_pin
-
-
-    # zwart_pin = 0
-    # wit_pin = 0
-    #
-    # for i in range(0, len(code)):
-    #     if gok[i] == code[i]:
-    #         vlag[i] = 0
-    #         zwart_pin += 1
-    # for i in range(4):
-    #     if vlag[i] == 1:
-    #         for x in range(0, len(code)):
-    #             if gok[i] == code[x] and vlag[x] == 1:
-    #                 wit_pin += 1
-    #                 vlag[x] = 0
-    # return zwart_pin, wit_pin
-
-
 def alle_oplossingen():
     """Hier worden alle mogelijk optie getoont die de computer moet gebruiken om de code te kunnen krakken"""
 
